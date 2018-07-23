@@ -24,6 +24,13 @@
 {% block body %}
     <a href="{{ path('home') }}" class="btn btn-dark">GO HOME</a>
     <a href="{{ path('logout') }}" class="btn btn-dark">LOGOUT</a>
+     <div class="row vh-padding-5">
+        <div class="col-8 mx-auto">
+            {% for message in app.session.flashbag.get('message') %}
+                <div class="alert alert-danger flash-message-alert" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
     <div class="row vh-padding-5">
         <div class="col">
             <div class="card">
@@ -67,3 +74,13 @@
         </div>
 
     {% endblock %}
+    {% block page_scripts %}
+    <script type="text/javascript">
+      var flashElement = document.querySelector('.flash-message-alert');
+
+      if (flashElement)
+        setTimeout(function() {
+          flashElement.remove();
+        }, 3000);
+    </script>
+{% endblock %}

@@ -83,6 +83,8 @@ class LeadsController extends Controller
     $entityManager->remove($lead);
     $entityManager->flush();
 
+    $this->get('session')->getFlashBag()->add('message', 'Successfully deleted lead.');
+
     return $this->redirectToRoute('admin_dashboard');
   }
 }
