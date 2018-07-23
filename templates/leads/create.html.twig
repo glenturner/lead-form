@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Lead Form{% endblock %}
+
+{% block page_styles %}
+    <style>
+        body {
+            background: #56CCF2;
+            background: -webkit-linear-gradient(to top, #56CCF2, #2F80ED);
+            background: linear-gradient(to top, #56CCF2, #2F80ED);
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col pt-5">
+            <a href="{{ path('home') }}">
+                <i class="fas fa-arrow-left back-btn text-white"></i>
+                &nbsp;&nbsp;<span class="back-btn text-white">back</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="row vh-padding-5">
+        <div class="col-8 mx-auto">
+            {% for message in app.session.flashbag.get('message') %}
+                <div class="alert alert-success flash-message-alert" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col text-center">
+                            <i class="fab fa-hooli"></i>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <form method="POST" action="{{ path('leads_store') }}">
+                                <input type="hidden" name="_token" value="{{ csrf_token('save-lead') }}" />
+
+                                <div class="form-group">
+                                    <label for="name">Name *</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="name"
+                                           name="name"
+                                           placeholder="John Appleseed"
+                                           required/>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email">Email Address *</label>
+                                    <input type="email"
+                                           class="form-control"
+                                           id="email"
+                                           name="email"
+                                           aria-describedby="emailHelp"
+                                           placeholder="email@domain.com"
+                                           required/>
+
+                                    <small id="emailHelp" class="form-text text-muted">
+                                        We'll never share your email with anyone else.
+                                    </small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="phone">Phone Number *</label>
+                                    <input type="tel"
+                                           pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                                           class="form-control"
+                                           id="phone"
+                                           name="phone"
+                                           placeholder="123-456-7890"
+                                           required/>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="postal_code">Postal Code *</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="postal_code"
+                                           name="postal_code"
+                                           placeholder="12345"
+                                           required/>
+                                </div>
+
+                                <button type="submit" class="btn btn-dark btn-block mt-5">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block page_scripts %}
+    <script type="text/javascript">
+      var flashElement = document.querySelector('.flash-message-alert');
+
+      if (flashElement)
+        setTimeout(function() {
+          flashElement.remove();
+        }, 3000);
+    </script>
+{% endblock %}

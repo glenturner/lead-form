@@ -1,0 +1,9 @@
+# index:
+#    path: /
+#    controller: App\Controller\LeadFormController::index
+
+logout:
+    path: /logout
+post_login:
+    path: /login
+    methods: post

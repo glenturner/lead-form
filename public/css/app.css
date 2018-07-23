@@ -1,0 +1,27 @@
+* {
+  font-family: 'Open Sans', sans-serif;
+}
+
+html, body {
+  height: 100vh;
+}
+
+.btn {
+  border-radius: 0;
+}
+
+a, a:hover {
+  text-decoration: none;
+}
+
+.vh-padding-5 {
+  margin-top: 5vh;
+}
+
+.fa-hooli {
+  font-size: 100px;
+}
+
+.back-btn {
+  font-size: 22px;
+}

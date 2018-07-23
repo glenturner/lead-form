@@ -1,0 +1,27 @@
+{% block page_styles %}
+    <style>
+        .navbar {
+            background: transparent;
+        }
+        .fa-hooli {
+            font-size: 100px;
+        }
+    </style>
+{% endblock %}
+
+<div class="container">
+    <nav class="navbar navbar-inverse">
+        <a href="{{ path('home') }}" class="navbar-brand text-white">
+            <i class="fab fa-hooli"></i>
+        </a>
+
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <form class="form-inline pull-right">
+                <a href="{{ path('admin_dashboard') }}" class="btn btn-dark mr-2">Dashboard</a>
+                <a href="{{ path('logout') }}" class="btn btn-dark">Logout</a>
+            </form>
+        {% else %}
+            <a href="{{ path('login') }}" class="btn btn-dark">Login</a>
+        {% endif %}
+    </nav>
+</div>

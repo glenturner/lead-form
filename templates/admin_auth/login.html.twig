@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Access Admin Dashboard{% endblock %}
+
+{% block page_styles %}
+    <style>
+        body {
+            background: #1488CC;
+            background: -webkit-linear-gradient(to right, #2B32B2, #1488CC);
+            background: linear-gradient(to right, #2B32B2, #1488CC);
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col pt-5">
+            <a href="{{ path('home') }}">
+                <i class="fas fa-arrow-left back-btn text-white"></i>
+                &nbsp;&nbsp;<span class="back-btn text-white">back</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="row vh-padding-5">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col text-center">
+                            <i class="fab fa-hooli"></i>
+                        </div>
+                    </div>
+
+                    {% if error %}
+                        <div class="row">
+                            {{ error.messageKey|trans(error.messageData, 'security') }}
+                        </div>
+                    {% endif %}
+
+                    <div class="row">
+                        <div class="col-12">
+                            <form method="POST" action="{{ path('post_login') }}">
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input type="text"
+                                           id="username"
+                                           name="_username"
+                                           class="form-control"
+                                           value="{{ lastUsername }}"
+                                           placeholder="‎username"/>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password"
+                                           id="password"
+                                           name="_password"
+                                           class="form-control"
+                                           placeholder="********"/>
+                                </div>
+                                <button type="submit" class="btn btn-block btn-dark mt-5">Login</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
